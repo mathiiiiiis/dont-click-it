@@ -34,6 +34,11 @@ export async function runRound(
     const appearDelay = round.intro === null ? 500 : 650;
     await sleep(appearDelay, roundSignal);
 
+    if (round.runner) {
+      button.enableRunner(2);
+      button.randomise();
+    }
+
     button.show();
 
     scheduleReveals(round, narrator, roundSignal);

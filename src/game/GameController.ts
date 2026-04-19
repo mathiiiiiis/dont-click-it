@@ -8,6 +8,8 @@ import type { Hud } from '../ui/Hud';
 import type { Flash } from '../ui/Flash';
 import { sleep } from '../util/async';
 import type { SoundBank } from '../audio/SoundBank';
+import { loadBest, saveBest } from '../util/highscore';
+import { shake } from '../ui/Shake';
 
 export type ControllerDeps = {
   rounds: Round[];
@@ -17,6 +19,7 @@ export type ControllerDeps = {
   hud: Hud;
   flash: Flash;
   soundBank: SoundBank;
+  stageEl: HTMLElement;
 };
 
 export class GameController {
@@ -55,6 +58,7 @@ export class GameController {
     this.lastId = null;
     this.abort = new AbortController();
     this.deps.hud.update(this.state);
+    this.deps.hud.setBest(loadBest());
     this.deps.soundBank.startDrone();
     this.deps.narrator.say('There is a button. I will tell you what to do with it. Usually.');
 
@@ -81,14 +85,30 @@ export class GameController {
       this.state.round++;
       this.deps.hud.update(this.state);
 
-      const round = this.pickRound();
-      if (!round) throw new Error('No eligible rounds');
-      this.lastId = round.id;
+      const base = this.pickRound();
+      if (!base) throw new Error('No eligible rounds');
+      this.lastId = base.id;
 
+      const scale = Math.max(0.55, 1 - this.state.round * 0.018);
+
+      //scale duration, reveal timings, and narrator typing speed together
+      const scaledReveals = base.reveals?.map((r) => ({
+        ...r,
+        at: Math.round(r.at * scale),
+      }));
+      const round: Round = {
+        ...base,
+        duration: Math.round(base.duration * scale),
+        reveals: scaledReveals,
+      };
+
+      this.deps.narrator.setSpeedScale(scale);
       const action = await runRound(round, this.deps, this.abort.signal);
       const outcome = scoreAction(round, action);
       this.recordEvent(round, action, outcome);
 
+      //reset narrator to normal speed
+      this.deps.narrator.setSpeedScale(1);
       if (outcome === 'correct') this.onCorrect(round);
       else this.onWrong(round);
 
@@ -109,12 +129,15 @@ export class GameController {
   }
 
   private onCorrect(round: Round): void {
-    this.state.score++;
     this.state.streak++;
     this.state.maxStreak = Math.max(this.state.maxStreak, this.state.streak);
 
+    const mult = this.state.streak >= 10 ? 3 : this.state.streak >= 5 ? 2 : 1;
+    this.state.score += mult;
+
     this.deps.hud.update(this.state);
-    this.deps.flash.show('+1', 'good');
+    const label = mult > 1 ? `+${mult} combo!` : '+1';
+    this.deps.flash.show(label, 'good');
     this.deps.soundBank.play('correct');
     this.deps.narrator.verdict(pickRandom(round.good), round.voice ?? 'narrator');
   }
@@ -126,6 +149,7 @@ export class GameController {
     this.deps.hud.update(this.state);
     this.deps.flash.show('\u22121 life', 'bad');
     this.deps.soundBank.play('wrong');
+    shake(this.deps.stageEl);
     this.deps.narrator.verdict(pickRandom(round.bad), round.voice ?? 'narrator');
   }
 
@@ -145,15 +169,23 @@ export class GameController {
     this.state.playing = false;
     this.deps.soundBank.stopDrone();
     this.deps.button.hide();
+
+    const best = saveBest(this.state.score);
+    this.deps.hud.setBest(best);
+    const isNew = this.state.score >= best && this.state.score > 0;
+
     const verdict = this.finalVerdict();
+    const bestNote = isNew ? ' New record.' : '';
     this.deps.narrator.verdict(
-      `Game over. ${this.state.score} correct across ${this.state.round} rounds. ${verdict}`,
+      `Game over. ${this.state.score} points across ${this.state.round} rounds.${bestNote} ${verdict}`,
     );
   }
 
   private finalVerdict(): string {
     const s = this.state.score;
-    if (s >= 12) return 'Frankly, suspicious.';
+    if (s >= 30) return 'I refuse to believe this.';
+    if (s >= 20) return 'Frankly, suspicious.';
+    if (s >= 12) return 'Impressive.';
     if (s >= 8) return 'Respectable.';
     if (s >= 4) return 'Adequate.';
     return "We've all been there. Some of us more than others.";

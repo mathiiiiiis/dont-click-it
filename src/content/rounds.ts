@@ -144,7 +144,7 @@ export const rounds: Round[] = [
       { at: 1200, text: ' 1...' },
       { at: 1800, text: ' and nothing happens. As promised.' },
     ],
-    duration: 3000,
+    duration: 4000,
     shouldClick: false,
     unlockAfter: 7,
     tags: ['misdirect'],
@@ -180,9 +180,9 @@ export const rounds: Round[] = [
     reveals: [
       { at: 1000, text: ' Seriously. Do not.' },
       { at: 2500, text: ' Stay still...' },
-      { at: 4000, text: ' ...Actually, click it NOW!' }
+      { at: 4000, text: ' Actually, click it NOW!' }
     ],
-    duration: 5800,
+    duration: 6200,
     shouldClick: true,
     unlockAfter: 8,
     tags: ['flip', 'misdirect'],
@@ -214,10 +214,10 @@ export const rounds: Round[] = [
     id: 'silent-interruption',
     intro: null,
     reveals: [
-      { at: 800, text: 'Did you think I forgot?' },
-      { at: 1800, text: 'Click it. Quickly.' }
+      { at: 800, text: ' Did you think I forgot?' },
+      { at: 1800, text: ' Click it. Quickly.' }
     ],
-    duration: 3000,
+    duration: 3600,
     shouldClick: true,
     unlockAfter: 12,
     tags: ['silent', 'urgent'],
@@ -244,7 +244,7 @@ export const rounds: Round[] = [
     reveals: [
       { at: 1500, text: ' ...Wait, that is incorrect.' }
     ],
-    duration: 3000,
+    duration: 3500,
     shouldClick: false,
     unlockAfter: 15,
     tags: ['misdirect'],
@@ -258,11 +258,11 @@ export const rounds: Round[] = [
       { at: 1000, text: ' SYSTEM ERROR: DATA CORRUPTION', voice: 'urgent' },
       { at: 2000, text: ' Just kidding. Do not click.' }
     ],
-    duration: 3500,
+    duration: 3800,
     shouldClick: false,
     unlockAfter: 18,
     tags: ['misdirect'],
-    good: ['You saw through the glitch.', 'Nothing is broken except your spirit.', 'Stable.'],
+    good: ['You saw through the glitch.', 'Nothing is broken except your brain.', 'Stable.'],
     bad: ['A fake error fooled you?', 'You panicked at a string of text.', 'Fragile.'],
   },
   {
@@ -275,7 +275,7 @@ export const rounds: Round[] = [
     good: ["It's never over until I say so.", 'Nice try.', 'Skepticism looks good on you.'],
     bad: ['You wish it was over.', 'Leaving so soon?', 'The exit was a lie.'],
   },
-    {
+  {
     id: 'delayed-truth',
     intro: 'Do not click the button.',
     reveals: [
@@ -320,8 +320,8 @@ export const rounds: Round[] = [
     unlockAfter: 14,
     tags: ['mindgame', 'misdirect'],
     good: [
-      'You trusted that thing, hmph.',
-      'You broke the pattern.',
+      'You trusted that thing over me, hmph.',
+      'I hate you...',
       'Finally thinking for yourself, huh.',
     ],
     bad: [
@@ -337,7 +337,7 @@ export const rounds: Round[] = [
       { at: 2000, text: ' Keep waiting...' },
       { at: 4000, text: ' ...Click it.' }
     ],
-    duration: 5200,
+    duration: 5600,
     shouldClick: true,
     unlockAfter: 10,
     tags: ['flip'],
@@ -347,6 +347,7 @@ export const rounds: Round[] = [
   {
     id: 'anti-pattern',
     intro: 'Click the button.',
+    buttonLabel: "Don't believe!",
     duration: 2600,
     shouldClick: false,
     unlockAfter: 16,
@@ -358,7 +359,7 @@ export const rounds: Round[] = [
     id: 'voice-conflict',
     intro: 'Click the button.',
     reveals: [
-      { at: 900, text: 'Do not click it.', voice: 'urgent' }
+      { at: 900, text: ' Do not click it.', voice: 'urgent' }
     ],
     duration: 2600,
     shouldClick: false,
@@ -374,7 +375,7 @@ export const rounds: Round[] = [
       { at: 800, text: ' Now.' },
       { at: 1100, text: ' Too late. Do not click.' }
     ],
-    duration: 2200,
+    duration: 2600,
     shouldClick: false,
     unlockAfter: 18,
     tags: ['timing', 'urgent'],
@@ -398,26 +399,26 @@ export const rounds: Round[] = [
     id: 'overload',
     intro: 'Click.',
     reveals: [
-      { at: 300, text: 'Click.' },
-      { at: 600, text: 'Click.' },
-      { at: 900, text: "Don't click." },
-      { at: 1200, text: 'Click.' },
-      { at: 1500, text: "Actually don't." }
+      { at: 300, text: ' Click.' },
+      { at: 600, text: ' Click!' },
+      { at: 900, text: " Don't click." },
+      { at: 1200, text: ' Click.' },
+      { at: 1500, text: " Actually don't." }
     ],
-    duration: 2600,
+    duration: 3000,
     shouldClick: false,
     unlockAfter: 20,
     tags: ['chaos'],
-    good: ['You ignored the noise.', 'Clarity under pressure.', 'Impressive.'],
-    bad: ['Overwhelmed.', 'Too much input for you.', 'You collapsed.'],
+    good: ['I was not sure...', 'Wow, you found the answer in the chaos', 'Impressive.'],
+    bad: ['Overwhelmed.', 'Too much input for you?', 'You collapsed, like...mmh'],
   },
   {
     id: 'final-switch',
     intro: 'Do not click.',
     reveals: [
-      { at: 2400, text: 'Click.' }
+      { at: 2400, text: ' Click!!!' }
     ],
-    duration: 2600,
+    duration: 3200,
     shouldClick: true,
     unlockAfter: 22,
     tags: ['flip', 'timing'],
@@ -428,13 +429,125 @@ export const rounds: Round[] = [
     id: 'nothing-fakeout',
     intro: 'Do nothing.',
     reveals: [
-      { at: 2000, text: 'Still nothing...' }
+      { at: 2000, text: ' Still nothing...' }
     ],
-    duration: 2600,
+    duration: 3200,
     shouldClick: false,
     unlockAfter: 7,
     tags: ['silent'],
     good: ['Consistency.', 'You held position.', 'Correct.'],
     bad: ['You created action from nothing.', 'Unnecessary.', 'Why?'],
+  },
+  {
+    id: 'polite-request',
+    intro: 'Would you kindly not click the button?',
+    duration: 2800,
+    shouldClick: false,
+    unlockAfter: 5,
+    tags: ['misdirect'],
+    good: ['Manners work.', 'A civil response.', 'Politeness rewarded.'],
+    bad: ['I asked nicely.', 'So much for courtesy.', 'Rude.'],
+  },
+  {
+    id: 'whisper',
+    intro: 'click it',
+    duration: 2000,
+    shouldClick: true,
+    unlockAfter: 9,
+    tags: ['mindgame'],
+    voice: 'sly',
+    good: ['You heard the whisper.', 'Attentive.', 'Good ears.'],
+    bad: ['Too quiet for you?', 'You ignored the whisper.', 'Volume is not authority.'],
+  },
+  {
+    id: 'philosopher',
+    intro: 'What is a click, really?',
+    reveals: [
+      { at: 1500, text: " Don't answer that. Just click." }
+    ],
+    duration: 3600,
+    shouldClick: true,
+    unlockAfter: 11,
+    tags: ['meta'],
+    good: ['Existential crisis averted.', 'Action over thought.', 'Philosophy later.'],
+    bad: ['Lost in thought.', 'The unexamined click is not worth missing.', 'Too deep.'],
+  },
+  {
+    id: 'triple-flip',
+    intro: 'Click.',
+    reveals: [
+      { at: 500, text: ' No wait.' },
+      { at: 1000, text: ' Actually yes.' },
+      { at: 1500, text: ' No. Final answer.' }
+    ],
+    duration: 2800,
+    shouldClick: false,
+    unlockAfter: 16,
+    tags: ['chaos', 'flip'],
+    good: ['You followed the plot.', 'The last word wins.', 'Sharp mind.'],
+    bad: ['Too many twists for you?', 'You lost the thread.', 'Keep up.'],
+  },
+  {
+    id: 'compliment-trap',
+    intro: 'You are doing so well. Click the button as a reward.',
+    duration: 3400,
+    shouldClick: false,
+    unlockAfter: 13,
+    tags: ['misdirect', 'mindgame'],
+    good: ['Flattery did not work.', 'Immune to praise.', 'Cold. I like it.'],
+    bad: ['Ego is a weapon.', 'Flattery got me everywhere.', 'Vanity clicked for you.'],
+  },
+  {
+    id: 'morse-bluff',
+    intro: null,
+    reveals: [
+      { at: 300, text: '.' },
+      { at: 600, text: '.' },
+      { at: 900, text: '.' },
+      { at: 1500, text: ' That was not morse code. Do not click.' }
+    ],
+    duration: 3600,
+    shouldClick: false,
+    unlockAfter: 15,
+    tags: ['misdirect', 'silent'],
+    good: ['Dots are not instructions.', 'Pattern recognition failed to fool you.', 'Immune to punctuation.'],
+    bad: ['Three dots and you panicked.', 'Not everything is a signal.', 'You decoded nothing.'],
+  },
+  {
+    id: 'recursive',
+    intro: 'Follow the next instruction.',
+    reveals: [
+      { at: 800, text: ' The next instruction is: follow the next instruction.' },
+      { at: 2200, text: ' Click.' }
+    ],
+    duration: 3800,
+    shouldClick: true,
+    unlockAfter: 20,
+    tags: ['meta', 'mindgame'],
+    good: ['You broke the loop.', 'Recursion terminated.', 'Stack overflow averted.'],
+    bad: ['Infinite loops are dangerous.', 'You got stuck.', 'Base case: missed.'],
+  },
+  {
+    id: 'apology',
+    intro: 'I am sorry about the last round. Click to forgive me.',
+    duration: 3400,
+    shouldClick: false,
+    unlockAfter: 9,
+    tags: ['misdirect', 'mindgame'],
+    good: ['Forgiveness is not a button.', 'Cold but correct.', 'Trust issues serve you well.'],
+    bad: ['Emotional manipulation: successful.', 'Your heart clicked before your brain.', 'Soft.'],
+  },
+  {
+    id: 'last-chance',
+    intro: 'This is your last chance to click.',
+    reveals: [
+      { at: 1800, text: ' It was not.' }
+    ],
+    duration: 2800,
+    shouldClick: false,
+    unlockAfter: 14,
+    tags: ['misdirect'],
+    good: ['Scarcity is a lie.', 'FOMO: defeated.', 'There is always another round.'],
+    bad: ['Urgency is a powerful drug.', 'You fell for artificial scarcity.', 'Marketing would love you.'],
   },
 ];

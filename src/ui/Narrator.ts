@@ -12,11 +12,16 @@ const SPEED: Record<VoiceId, number> = {
 export class Narrator {
   private abort: AbortController | null = null;
   private currentText = '';
+  private speedScale = 1;
 
   constructor(
     private readonly el: HTMLElement,
     private readonly synth: VoiceSynth,
   ) {}
+
+  setSpeedScale(scale: number): void {
+    this.speedScale = Math.max(0.3, Math.min(1, scale));
+  }
 
   async say(text: string, voice: VoiceId = 'narrator'): Promise<void> {
     this.stop();
@@ -63,7 +68,7 @@ export class Narrator {
   }
 
   private async type(text: string, voice: VoiceId, signal: AbortSignal): Promise<void> {
-    const speed = SPEED[voice];
+    const speed = Math.round(SPEED[voice] * this.speedScale);
     try {
       for (let i = 0; i < text.length; i++) {
         if (signal.aborted) return;
