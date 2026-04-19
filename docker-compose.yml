@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    container_name: dont-click-it-app
+    ports:
+      - "${PORT}:80"
+    restart: unless-stopped
