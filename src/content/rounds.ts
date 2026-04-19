@@ -77,7 +77,7 @@ export const rounds: Round[] = [
     good: [
       "You didn't click an unprompted button. Smart.",
       "When in doubt, don't.",
-      'I said nothing. You did nothing. A meeting of minds.',
+      'I said nothing. You did nothing.',
     ],
     bad: [
       'Nobody told you to click.',
