@@ -22,6 +22,8 @@ export class BigButton {
   hide(): void {
     this.el.classList.remove('live');
     this.clearRunner();
+    this.el.style.left = '';
+    this.el.style.right = '';
   }
 
   randomise(): void {
