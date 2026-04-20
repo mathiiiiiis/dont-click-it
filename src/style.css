@@ -423,6 +423,45 @@ body {
   --rot: 12deg;
 }
 
+.settings-row--wrap {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.settings-row--wrap .settings-label {
+  padding-top: 3px;
+}
+
+.diff-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.diff-btn {
+  font-family: var(--font-hand);
+  font-size: 13px;
+  padding: 3px 9px;
+  border: 1.5px solid var(--ink-muted);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+  line-height: 1.4;
+}
+.diff-btn:hover {
+  background: var(--bubble);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.diff-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
 
 .hud-streak.on-fire {
   color: var(--accent);

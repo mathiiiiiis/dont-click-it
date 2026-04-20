@@ -169,6 +169,17 @@ wireSlider('sfx', (v) => soundBank.setSfxVolume(v), previewSfx);
 wireSlider('drone', (v) => soundBank.setDroneVolume(v), previewDrone);
 wireSlider('voice', (v) => synth.setVolumeScale(v), previewVoice);
 
+// difficulty
+const diffBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-diff]'));
+diffBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    diffBtns.forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    const scale = parseFloat(btn.dataset['diff'] ?? '1');
+    controller.setDifficulty(scale);
+  });
+});
+
 //show saved high score on load
 import { loadBest } from './util/highscore';
 hud.setBest(loadBest());

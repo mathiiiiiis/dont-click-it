@@ -78,6 +78,11 @@ export class GameController {
     this.abort?.abort();
   }
 
+  private difficultyScale = 1;
+  setDifficulty(scale: number): void {
+    this.difficultyScale = Math.max(0.1, scale);
+  }
+
   private async loop(): Promise<void> {
     if (!this.abort) return;
 
@@ -89,7 +94,8 @@ export class GameController {
       if (!base) throw new Error('No eligible rounds');
       this.lastId = base.id;
 
-      const scale = Math.max(0.55, 1 - this.state.round * 0.018);
+      const baseScale = Math.max(0.55, 1 - this.state.round * 0.018);
+      const scale = baseScale * this.difficultyScale;
 
       //scale duration, reveal timings, and narrator typing speed together
       const scaledReveals = base.reveals?.map((r) => ({
