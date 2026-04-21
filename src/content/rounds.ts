@@ -228,8 +228,8 @@ export const rounds: Round[] = [
     id: 'the-echo',
     intro: 'Click.',
     reveals: [
-      { at: 400, text: 'Click.', voice: 'urgent' },
-      { at: 800, text: "Don't click.", voice: 'sly' }
+      { at: 400, text: ' Click.', voice: 'urgent' },
+      { at: 800, text: " Don't click.", voice: 'sly' }
     ],
     duration: 2200,
     shouldClick: false,
